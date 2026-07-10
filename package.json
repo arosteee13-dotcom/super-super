@@ -1,0 +1,14 @@
+{
+  "name": "supersuper",
+  "private": true,
+  "version": "1.0.0",
+  "description": "SúperSúper — Comparador de precios de supermercados",
+  "scripts": {/Users/chrisdearostegui/Proyectos/Super Super/package.json
+      /Users/chrisdearostegui/Proyectos/Super Super/public
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.0"
+  }
+}

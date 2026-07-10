@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SúperSúper — Comparador de precios</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Aplicación / contenedor vertical móvil -->
+  <div class="app">
+
+    <!-- Cabecera con buscador -->
+    <header class="header">
+      <h1 class="header-titulo">SúperSúper</h1>
+      <div class="buscador">
+        <svg class="buscador-icono" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+          <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input
+          type="text"
+          id="buscador-input"
+          placeholder="Buscar producto…"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+        >
+      </div>
+    </header>
+
+    <!-- ── TAB: BUSCAR (activo por defecto) ── -->
+    <section class="tab-section tab-section--active" id="tab-buscar">
+
+      <!-- Filtros rápidos por supermercado (solo en Buscar) -->
+      <nav class="filtros" id="filtros">
+        <button class="filtro-btn activo" data-super="Mercadona" style="--super-color: #00a650">
+          <img class="filtro-logo" src="https://cdn.brandfetch.io/mercadona.es/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1667599901347" alt="Mercadona"> <span class="filtro-texto">Mercadona</span>
+        </button>
+        <button class="filtro-btn activo" data-super="Dia" style="--super-color: #e21119">
+          <img class="filtro-logo" src="https://cdn.brandfetch.io/dia.es/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1667599901347" alt="Dia"> <span class="filtro-texto">Dia</span>
+        </button>
+        <button class="filtro-btn activo" data-super="Bonpreu" style="--super-color: #ff7900">
+          <img class="filtro-logo" src="https://cdn.brandfetch.io/idzWmvu6t1/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1773741883570" alt="Bonpreu"> <span class="filtro-texto">Bonpreu</span>
+        </button>
+        <button class="filtro-btn activo" data-super="Condis" style="--super-color: #e30613">
+          <img class="filtro-logo" src="https://cdn.brandfetch.io/condis.es/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1667599901347" alt="Condis"> <span class="filtro-texto">Condis</span>
+        </button>
+        <button class="filtro-btn activo" data-super="bonÀrea" style="--super-color: #004B87">
+          <img class="filtro-logo" src="https://cdn.brandfetch.io/bonarea.com/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1667599901347" alt="bonÀrea"> <span class="filtro-texto">bonÀrea</span>
+        </button>
+        <button class="filtro-btn activo" data-super="Caprabo" style="--super-color: #009ee0">
+          <img class="filtro-logo" src="https://cdn.brandfetch.io/caprabo.com/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1667599901347" alt="Caprabo"> <span class="filtro-texto">Caprabo</span>
+        </button>
+        <button class="filtro-btn activo" data-super="Lidl" style="--super-color: #0050aa">
+          <img class="filtro-logo" src="https://cdn.brandfetch.io/lidl.es/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1667599901347" alt="Lidl"> <span class="filtro-texto">Lidl</span>
+        </button>
+        <button class="filtro-btn activo" data-super="Ametller Origen" style="--super-color: #314638">
+          <img class="filtro-logo" src="https://cdn.brandfetch.io/ametllerorigen.com/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1667599901347" alt="Ametller Origen"> <span class="filtro-texto">Ametller Origen</span>
+        </button>
+        <button class="filtro-btn activo" data-super="La Sirena" style="--super-color: #003399">
+          <img class="filtro-logo" src="https://cdn.brandfetch.io/lasirena.es/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1667599901347" alt="La Sirena"> <span class="filtro-texto">La Sirena</span>
+        </button>
+      </nav>
+
+      <!-- Mensaje de error (solo en Buscar) -->
+      <div id="error-msg" class="error-msg" role="alert"></div>
+
+      <main id="products-container" class="resultados">
+        <!-- El JavaScript renderiza aquí -->
+      </main>
+      <footer class="footer">
+        <p class="footer-texto">Precios orientativos. Pueden variar según establecimiento y ofertas.</p>
+      </footer>
+    </section>
+
+    <!-- ── TAB: MIS LISTAS ── -->
+    <section class="tab-section" id="tab-listas">
+      <div class="tab-placeholder">
+        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <line x1="9" y1="9" x2="15" y2="9"/>
+          <line x1="9" y1="13" x2="15" y2="13"/>
+          <line x1="9" y1="17" x2="12" y2="17"/>
+        </svg>
+        <h2>Mis Listas</h2>
+        <p>Aún no tienes listas guardadas.<br>¡Pulsa el icono de añadir en tus productos favoritos!</p>
+      </div>
+    </section>
+
+    <!-- ── TAB: CHOLLOS ── -->
+    <section class="tab-section" id="tab-chollos">
+      <div class="chollos-header">
+        <h2>Chollos del día</h2>
+        <p class="chollos-actualizado">Bajadas de precio hoy en Barcelona · Actualizado hace 5 min</p>
+      </div>
+      <div class="chollos-grid">
+        <article class="chollo-card">
+          <span class="chollo-badge">-15%</span>
+          <div class="chollo-img" style="background:#e8f5e9">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#00a650" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <div class="chollo-info">
+            <h3>Aceite oliva virgen extra 1L</h3>
+            <div class="chollo-precios">
+              <span class="chollo-precio-ant">5,20 €</span>
+              <span class="chollo-precio-act">4,42 €</span>
+            </div>
+            <p class="chollo-super">Mercadona · Hasta fin de existencias</p>
+          </div>
+        </article>
+        <article class="chollo-card">
+          <span class="chollo-badge">-20%</span>
+          <div class="chollo-img" style="background:#fff3e0">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#ff7900" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <div class="chollo-info">
+            <h3>Pechuga de pollo 1kg</h3>
+            <div class="chollo-precios">
+              <span class="chollo-precio-ant">7,20 €</span>
+              <span class="chollo-precio-act">5,76 €</span>
+            </div>
+            <p class="chollo-super">Bonpreu · Oferta semanal</p>
+          </div>
+        </article>
+      </div>
+      <footer class="footer">
+        <p class="footer-texto">Precios orientativos. Pueden variar según establecimiento y ofertas.</p>
+      </footer>
+    </section>
+
+    <!-- ── TAB: AJUSTES ── -->
+    <section class="tab-section" id="tab-ajustes">
+      <div class="ajustes-panel">
+        <h2>Ajustes</h2>
+
+        <div class="ajustes-grupo">
+          <h3>Vista de los filtros</h3>
+          <p class="ajustes-desc">Elige cómo se muestran los supermercados en la barra de búsqueda.</p>
+
+          <label class="ajustes-radio">
+            <input type="radio" name="filtro-vista" value="logo-only">
+            <span class="ajustes-radio-indicator"></span>
+            <span class="ajustes-radio-content">
+              <strong>Solo logo</strong>
+              <span>Los logos aparecen más grandes, sin texto</span>
+            </span>
+          </label>
+
+          <label class="ajustes-radio">
+            <input type="radio" name="filtro-vista" value="logo-name" checked>
+            <span class="ajustes-radio-indicator"></span>
+            <span class="ajustes-radio-content">
+              <strong>Logo y nombre</strong>
+              <span>Muestra el logo seguido del nombre del supermercado</span>
+            </span>
+          </label>
+
+          <label class="ajustes-radio">
+            <input type="radio" name="filtro-vista" value="name-only">
+            <span class="ajustes-radio-indicator"></span>
+            <span class="ajustes-radio-content">
+              <strong>Solo nombre</strong>
+              <span>Muestra solo el nombre, sin logo</span>
+            </span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── BOTTOM NAVIGATION ── -->
+    <nav class="bottom-nav">
+      <button class="bottom-nav-btn activo" data-tab="buscar">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/>
+        </svg>
+        <span>Buscar</span>
+      </button>
+      <button class="bottom-nav-btn" data-tab="listas">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <line x1="9" y1="9" x2="15" y2="9"/>
+          <line x1="9" y1="13" x2="15" y2="13"/>
+          <line x1="9" y1="17" x2="12" y2="17"/>
+        </svg>
+        <span>Mis Listas</span>
+      </button>
+      <button class="bottom-nav-btn" data-tab="chollos">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+          <line x1="7" y1="7" x2="7.01" y2="7"/>
+        </svg>
+        <span>Chollos</span>
+      </button>
+      <button class="bottom-nav-btn" data-tab="ajustes">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span>Ajustes</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

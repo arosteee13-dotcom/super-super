@@ -1,0 +1,717 @@
+/* ============================================================
+   SúperSúper — Estilos Mobile-First
+   Diseño minimalista, claro y coherente.
+   ============================================================ */
+
+/* ---- Reset básico ---- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #f5f5f7;
+  color: #1d1d1f;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input {
+  font: inherit;
+  color: inherit;
+}
+
+/* ---- Contenedor principal ---- */
+.app {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f7;
+  padding-bottom: 64px;
+}
+
+/* ============================================================
+   HEADER + BUSCADOR
+   ============================================================ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(245, 245, 247, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.header-titulo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1d1d1f;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.buscador {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.buscador-icono {
+  position: absolute;
+  left: 14px;
+  color: #8e8e93;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+#buscador-input {
+  width: 100%;
+  padding: 12px 14px 12px 42px;
+  border: 1.5px solid #e5e5ea;
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: 0.9375rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+#buscador-input::placeholder {
+  color: #aeaeb2;
+}
+
+#buscador-input:focus {
+  border-color: #00a650;
+  box-shadow: 0 0 0 3px rgba(0, 166, 80, 0.12);
+}
+
+/* ============================================================
+   FILTROS RÁPIDOS
+   ============================================================ */
+.filtros {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: 8px;
+  padding: 0 20px;
+  height: 76px;
+  align-items: center;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.filtros::-webkit-scrollbar {
+  display: none;
+}
+
+.filtro-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #636366;
+  background: #f2f2f7;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.filtro-btn:active {
+  transform: scale(0.96);
+}
+
+/* Logo circular dentro de cada filtro */
+.filtro-logo {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
+/* Texto del filtro (se oculta en modo solo-logo) */
+.filtro-texto {
+  display: inline;
+}
+
+/* ── Variantes según ajustes ── */
+.filtros-logo-only .filtro-logo {
+  width: 34px;
+  height: 34px;
+}
+
+.filtros-logo-only .filtro-texto {
+  display: none;
+}
+
+.filtros-logo-only .filtro-btn {
+  gap: 0;
+  padding: 6px 10px;
+}
+
+.filtros-name-only .filtro-logo {
+  display: none;
+}
+
+/* Estado activo: fondo teñido con el color al 12 % */
+.filtro-btn.activo {
+  background: color-mix(in srgb, var(--super-color) 12%, #f2f2f7);
+  color: var(--super-color);
+}
+
+.filtro-btn.activo .filtro-logo {
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================================
+   RESULTADOS (tarjetas de producto)
+   ============================================================ */
+.resultados {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 20px 24px;
+}
+
+/* Mensaje cuando no hay resultados */
+.resultados-vacio {
+  text-align: center;
+  padding: 48px 20px;
+  color: #8e8e93;
+  font-size: 0.9375rem;
+}
+
+/* ---- Tarjeta de producto ---- */
+.tarjeta-producto {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 0 18px 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.tarjeta-producto:active {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Imagen del producto ── */
+.tarjeta-imagen-wrapper {
+  margin: 0 -18px 12px;
+  height: 140px;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.tarjeta-imagen-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.producto-nombre {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #1d1d1f;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.producto-precios {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Fila de precio individual */
+.precio-item {
+  display: grid;
+  grid-template-columns: 14px auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px 7px 7px;
+  border-radius: 10px;
+  border-left: 3px solid var(--super-color, transparent);
+  transition: background 0.15s ease;
+}
+
+.precio-item::before {
+  content: '';
+  display: block;
+  width: 14px;
+  text-align: center;
+  font-size: 0.65rem;
+  color: transparent;
+  line-height: 1;
+}
+
+.precio-item.mejor-precio::before {
+  content: '★';
+  color: #00a650;
+}
+
+.super-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.super-avatar--fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--super-color, #aaa);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0;
+  box-shadow: none;
+}
+
+.super-nombre {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #3a3a3c;
+}
+
+.precio-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
+}
+
+.precio-valor {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #1d1d1f;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
+.precio-unidad {
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: #aeaeb2;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+/* ---- Filas no destacadas (más tenues) ---- */
+.precio-item:not(.mejor-precio) {
+  opacity: 0.55;
+}
+
+/* ---- Mejor precio (más barato) ---- */
+.precio-item.mejor-precio {
+  background: rgba(0, 166, 80, 0.06);
+}
+
+.precio-item.mejor-precio .super-nombre {
+  font-weight: 600;
+}
+
+.precio-item.mejor-precio .precio-valor {
+  color: #00a650;
+  font-weight: 700;
+}
+
+/* ============================================================
+   ERROR MSG (conexión con backend)
+   ============================================================ */
+.error-msg {
+  padding: 8px 20px 0;
+  font-size: 0.8125rem;
+  color: #e21119;
+  text-align: center;
+  line-height: 1.4;
+  min-height: 0;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  padding: 20px 20px 32px;
+  text-align: center;
+}
+
+.footer-texto {
+  font-size: 0.75rem;
+  color: #aeaeb2;
+}
+
+/* ============================================================
+   TAB SECTIONS (para bottom navigation)
+   ============================================================ */
+
+.tab-section {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+}
+
+.tab-section--active {
+  display: flex;
+}
+
+/* ============================================================
+   AJUSTES
+   ============================================================ */
+
+.ajustes-panel {
+  padding: 20px;
+  flex: 1;
+}
+
+.ajustes-panel h2 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 20px;
+}
+
+.ajustes-grupo {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.ajustes-grupo h3 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 4px;
+}
+
+.ajustes-desc {
+  font-size: 0.8125rem;
+  color: #aeaeb2;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.ajustes-radio {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 0;
+  cursor: pointer;
+  border-top: 1px solid #f2f2f7;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ajustes-radio:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.ajustes-radio:last-of-type {
+  padding-bottom: 0;
+}
+
+.ajustes-radio input {
+  display: none;
+}
+
+.ajustes-radio-indicator {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border-radius: 50%;
+  border: 2px solid #c7c7cc;
+  margin-top: 2px;
+  position: relative;
+  transition: border-color 0.2s;
+}
+
+.ajustes-radio input:checked + .ajustes-radio-indicator {
+  border-color: #00a650;
+}
+
+.ajustes-radio input:checked + .ajustes-radio-indicator::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00a650;
+}
+
+.ajustes-radio-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.ajustes-radio-content strong {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1d1d1f;
+}
+
+.ajustes-radio-content span {
+  font-size: 0.75rem;
+  color: #aeaeb2;
+  line-height: 1.3;
+}
+
+/* ── Placeholder para tabs sin contenido real ── */
+.tab-placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px 24px;
+  color: #8e8e93;
+  text-align: center;
+}
+
+.tab-placeholder svg {
+  color: #c7c7cc;
+  margin-bottom: 4px;
+}
+
+.tab-placeholder h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1d1d1f;
+}
+
+.tab-placeholder p {
+  font-size: 0.85rem;
+  max-width: 280px;
+  line-height: 1.5;
+  color: #aeaeb2;
+}
+
+/* ── Chollos ── */
+.chollos-header {
+  padding: 20px 20px 12px;
+}
+
+.chollos-header h2 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 4px;
+}
+
+.chollos-actualizado {
+  font-size: 0.75rem;
+  color: #aeaeb2;
+}
+
+.chollos-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 20px 20px;
+  flex: 1;
+}
+
+.chollo-card {
+  display: flex;
+  gap: 14px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+
+.chollo-badge {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  background: #e21119;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.chollo-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.chollo-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.chollo-info h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1d1d1f;
+  line-height: 1.3;
+}
+
+.chollo-precios {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chollo-precio-ant {
+  font-size: 0.75rem;
+  color: #aeaeb2;
+  text-decoration: line-through;
+}
+
+.chollo-precio-act {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e21119;
+}
+
+.chollo-super {
+  font-size: 0.7rem;
+  color: #aeaeb2;
+}
+
+/* ============================================================
+   BOTTOM NAVIGATION
+   ============================================================ */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  height: 64px;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -1px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.bottom-nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  color: #8e8e93;
+  transition: color 0.2s ease;
+  flex: 1;
+  max-width: 80px;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  background: none;
+}
+
+.bottom-nav-btn svg {
+  display: block;
+}
+
+.bottom-nav-btn span {
+  font-size: 0.6rem;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.bottom-nav-btn.activo {
+  color: #00a650;
+}
+
+.bottom-nav-btn:active {
+  opacity: 0.7;
+  transform: scale(0.95);
+}
+
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+/* Soporte para navegadores sin color-mix() */
+@supports not (background: color-mix(in srgb, red 50%, blue)) {
+  .filtro-btn.activo {
+    opacity: 0.92;
+  }
+}
+
+/* ============================================================
+   ANIMACIONES
+   ============================================================ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.tarjeta-producto {
+  animation: fadeIn 0.3s ease both;
+}
+
+.tarjeta-producto:nth-child(1) { animation-delay: 0.00s; }
+.tarjeta-producto:nth-child(2) { animation-delay: 0.03s; }
+.tarjeta-producto:nth-child(3) { animation-delay: 0.06s; }
+.tarjeta-producto:nth-child(4) { animation-delay: 0.09s; }
+.tarjeta-producto:nth-child(5) { animation-delay: 0.12s; }
+.tarjeta-producto:nth-child(6) { animation-delay: 0.15s; }
+.tarjeta-producto:nth-child(7) { animation-delay: 0.18s; }
+.tarjeta-producto:nth-child(8) { animation-delay: 0.21s; }
